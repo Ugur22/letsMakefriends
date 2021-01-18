@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "381642857190",
+    "project_id": "letsbefriends-e5a5b",
+    "storage_bucket": "letsbefriends-e5a5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381642857190:android:f42f84f005219130237927",
+        "android_client_info": {
+          "package_name": "com.letsbefriends"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "381642857190-f5240938h68qeh478d3tf04f8h8fgcos.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.letsbefriends",
+            "certificate_hash": "7a0e6e14ae896cfe0a16375ff1d1ad6c8e6d4bb7"
+          }
+        },
+        {
+          "client_id": "381642857190-lu9a7k6dt0voffl6o242vnap91il004e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAof3mSXMaNYKbdv1-giYoWrsF4HMpB4hs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "381642857190-lu9a7k6dt0voffl6o242vnap91il004e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

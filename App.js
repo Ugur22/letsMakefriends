@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useState, useEffect }  from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -16,15 +16,27 @@ import {
   StatusBar,
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import { Colors,} from 'react-native/Libraries/NewAppScreen';
+import { Button, Header } from 'react-native-elements';
+import auth from '@react-native-firebase/auth';
 
 const App: () => React$Node = () => {
+	const [initializing, setInitializing] = useState(true);
+	const [user, setUser] = useState();
+	
+	  // Handle user state changes
+		function onAuthStateChanged(user) {
+			setUser(user);
+			if (initializing) setInitializing(false);
+		}
+
+		useEffect(() => {
+			const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+			return subscriber; // unsubscribe on unmount
+		}, []); 
+
+		if (initializing) return null;
+	
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -32,39 +44,25 @@ const App: () => React$Node = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
+					<Header
+            leftComponent={{ icon: 'menu', color: '#fff' }}
+            centerComponent={{ text: 'letsmakefriends', style: { color: '#fff', fontSize: 18 } }}
+            rightComponent={{ icon: 'home', color: '#fff' }}
+            containerStyle={{
+              backgroundColor: '#e8cb6f',
+              justifyContent: 'space-around',
+            }}
+          />
+					<View style={styles.body}>
             <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
+              <Button style={styles.button}
+                title="Login"
+                type="solid"
+                buttonStyle={{
+                  backgroundColor: '#e8cb6f',
+                }}
+              />
             </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
           </View>
         </ScrollView>
       </SafeAreaView>
