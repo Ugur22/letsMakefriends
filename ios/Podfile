@@ -12,6 +12,10 @@ target 'letsbefriends' do
 
   pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
   target 'letsbefriendsTests' do
     inherit! :complete
     # Pods for testing
