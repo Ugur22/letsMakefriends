@@ -1,7 +1,10 @@
 import React, { useState, useEffect }  from 'react';
 import {View,Text,StyleSheet,Button} from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
-import Image from 'react-native-remote-svg';
+import Friend from '../assets/images/undraw_friends_r511.svg';
+import Skate from '../assets/images/undraw_skateboard_d6or.svg';
+import Powerful from '../assets/images/undraw_Powerful_re_frhr.svg';
+
 
 const OnboardingScreen = ({navigation}) => {
 	return (
@@ -12,22 +15,19 @@ const OnboardingScreen = ({navigation}) => {
 		pages={[
 			{
 				backgroundColor: '#fff',
-				image: <Image source={require('../assets/images/undraw_friends_r511.svg')}
-				style={{ width: 300, height: 300 }} />,
+				image:	<Friend height={300} width={300} />,
 				title: 'Onboarding 1',
 				subtitle: 'Done with React Native Onboarding Swiper',
 			},
 			{
 				backgroundColor: '#34495e',
-				image: <Image source={require('../assets/images/undraw_skateboard_d6or.svg')}
-				style={{ width: 300, height: 300 }} />,
+				image: 	<Skate height={300} width={300} />,
 				title: 'Onboarding 2',
 				subtitle: 'Done with React Native Onboarding Swiper 2',
 			},
 			{
 				backgroundColor: '#F9A826',
-				image: <Image source={require('../assets/images/undraw_Powerful_re_frhr.svg')}
-				style={{ width: 300, height: 300 }} />,
+				image: 	<Powerful height={300} width={300} />,
 				title: 'Onboarding 3',
 				subtitle: 'Done with React Native Onboarding Swiper 3',
 			},

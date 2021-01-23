@@ -1,10 +1,10 @@
 import React, { useState, useContext,useEffect }  from 'react';
 import {View,Text} from 'react-native';
-import Image from 'react-native-remote-svg';
 import { Button, Header,Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {styles} from '../utils/style';
 import {AuthContext} from '../navigation/AuthProvider';
+import Friends from '../assets/images/undraw_true_friends_c94g.svg';
 
 const Login = ({navigation}) => {
 
@@ -15,8 +15,7 @@ const Login = ({navigation}) => {
 	return (
 		<View style={styles.container}>
 		<Text style={{fontSize:28,fontWeight:'bold'}}>Letsmakefriends</Text>
-			<Image source={require('../assets/images/undraw_true_friends_c94g.svg')}
-				style={styles.logo} />
+				<Friends height={300} width={300} />
 			<Text style={styles.header} >Welcome to our app</Text>
 			<Text style={styles.subtitle}  >Welcome to letsmakefriends join the community</Text>
 			<Button titleStyle={{color: '#F9A826',fontSize:20,fontStyle:'italic',textDecorationLine:'underline',marginTop:30}}  type="clear" title="What's Letsmakefriends?" onPress={() => navigation.navigate('Onboarding')}/>

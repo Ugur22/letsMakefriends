@@ -1,10 +1,10 @@
 import React, { useContext, useState }  from 'react';
 import {View,Text} from 'react-native';
 import { Button, Header,Input } from 'react-native-elements';
-import Image from 'react-native-remote-svg';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {styles} from '../utils/style';
 import {AuthContext} from '../navigation/AuthProvider';
+import SignUpImage from '../assets/images/undraw_sign_in_e6hj.svg';
 
 const SignupScreen = ({navigation}) => {
 
@@ -14,8 +14,7 @@ const SignupScreen = ({navigation}) => {
 
 	return (
 		<View style={styles.container}>
-			<Image source={require('../assets/images/undraw_sign_in_e6hj.svg')}
-				style={styles.logo} />
+			<SignUpImage height={300} width={300} />
 			<Text style={styles.header} >Create an account</Text>
 			<Input labelValue={email} onChangeText={(userEmail) => setEmail(userEmail)}  leftIcon={ <Icon name='child'size={24} color='#F9A826'/>} keyboardType="email-address" autoCapitalize="none" 
 			inputContainerStyle={{marginHorizontal:20}} placeholder="email" />
