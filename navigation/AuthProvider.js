@@ -13,16 +13,24 @@ export const AuthProvider = ({children}) => {
         setUser,
         login: async (email, password) => {
           try {
-            await auth().signInWithEmailAndPassword(email, password);
+						if(email === undefined || password === undefined || email === '' || password === '' ){
+							alert("Email or password is empty")
+						}else{
+							await auth().signInWithEmailAndPassword(email, password);
+						}
           } catch (e) {
-            console.log(e);
+            alert('This combination of email and password does not exist')
           }
         },
         register: async (email, password) => {
           try {
-            await auth().createUserWithEmailAndPassword(email, password);
+						if(email === undefined || password === undefined || email === '' || password === ''){
+							alert("Email or password is empty");
+						}else{
+							await auth().createUserWithEmailAndPassword(email, password);
+						}
           } catch (e) {
-            console.log(e);
+           alert('create user failed');
           }
         },
         logout: async () => {

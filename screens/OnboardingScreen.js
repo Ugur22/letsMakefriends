@@ -4,6 +4,7 @@ import Onboarding from 'react-native-onboarding-swiper';
 import Friend from '../assets/images/undraw_friends_r511.svg';
 import Skate from '../assets/images/undraw_skateboard_d6or.svg';
 import Powerful from '../assets/images/undraw_Powerful_re_frhr.svg';
+import {Appname} from '../utils/strings';
 
 
 const OnboardingScreen = ({navigation}) => {
@@ -15,21 +16,21 @@ const OnboardingScreen = ({navigation}) => {
 		pages={[
 			{
 				backgroundColor: '#fff',
-				image:	<Friend height={300} width={300} />,
-				title: 'Onboarding 1',
-				subtitle: 'Done with React Native Onboarding Swiper',
+				image:	<Powerful height={300} width={300} />,
+				title: `What is ${Appname}?`,
+				subtitle: 'Its an app that will guide you to become a social butterfly step by step',
 			},
 			{
-				backgroundColor: '#34495e',
+				backgroundColor: '#fff',
+				image: 	<Friend height={300} width={300} />,
+				title: `What is the goal of ${Appname}?`,
+				subtitle: 'We have created 9 chapters to guide you through your process. Each chapter comes with tasks and information to educate and guide you along the way',
+			},
+			{
+				backgroundColor: '#fff',
 				image: 	<Skate height={300} width={300} />,
-				title: 'Onboarding 2',
-				subtitle: 'Done with React Native Onboarding Swiper 2',
-			},
-			{
-				backgroundColor: '#F9A826',
-				image: 	<Powerful height={300} width={300} />,
-				title: 'Onboarding 3',
-				subtitle: 'Done with React Native Onboarding Swiper 3',
+				title: 'The chapters and their own story',
+				subtitle: 'chapters explanation',
 			},
 		]}/>
 	)

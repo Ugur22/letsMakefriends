@@ -1,0 +1,1 @@
+export const Appname = 'LetsMakeFriends';
