@@ -23,10 +23,25 @@ export const styles = StyleSheet.create({
 		margin:10,
 		width:200
 	},
+	full_button: {
+		backgroundColor: '#F9A826',
+		margin:10,
+		fontSize:20,
+		padding:20,
+	},
+	bottom: {
+		flex: 1,
+		justifyContent: 'flex-end',
+		marginBottom: 36,
+		alignSelf: 'stretch',
+		marginHorizontal:20,
+    textAlign: 'center',
+	},	
 	header: {
-		fontSize:24
+		fontSize:24,
 	},
 	subtitle: {
 		fontSize:16,
+		paddingTop:10
 	}
 });

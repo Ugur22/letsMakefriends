@@ -15,8 +15,8 @@ const Login = ({navigation}) => {
 
 	return (
 		<View style={styles.container}>
-		<Text style={{fontSize:28,fontWeight:'bold'}}>{Appname}s</Text>
-				<Friends height={300} width={300} />
+			<Text style={{fontSize:28,fontWeight:'bold'}}>{Appname}s</Text>
+			<Friends height={300} width={300} />
 			<Text style={styles.header} >Welcome to our app</Text>
 			<Text style={styles.subtitle}  >Welcome to {Appname} join the community</Text>
 			<Button titleStyle={{color: '#F9A826',fontSize:20,fontStyle:'italic',textDecorationLine:'underline',marginTop:30}}  type="clear" title="What's LetsMakeFriends?" onPress={() => navigation.navigate('Onboarding')}/>

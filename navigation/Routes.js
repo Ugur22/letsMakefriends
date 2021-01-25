@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import {AuthContext} from './AuthProvider';
 import {View,Text} from 'react-native';
+import Friends from '../assets/images/undraw_true_friends_c94g.svg';
 
 import AuthStack from './AuthStack';
 import AppStack from './AppStack';
@@ -24,7 +25,7 @@ const Routes = () => {
 	}, []);
 
 	if (loading) {
-    return 	<Text >Loading..</Text>;
+    return 	<Friends height={300} width={300} />;
   }
 	
 	if(initializing) return null;
