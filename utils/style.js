@@ -18,13 +18,13 @@ export const styles = StyleSheet.create({
 		fontSize:24
 	},
 	button: {
-		backgroundColor: '#F9A826',
+		backgroundColor: '#E8CA6F',
 		color: '#000',
 		margin:10,
 		width:200
 	},
 	full_button: {
-		backgroundColor: '#F9A826',
+		backgroundColor: '#E8CA6F',
 		margin:10,
 		fontSize:20,
 		padding:20,

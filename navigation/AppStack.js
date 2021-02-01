@@ -18,7 +18,7 @@ const AppStack = () => {
 				headerRight: () => (
 					<Button buttonStyle={{backgroundColor:'transparent'}}
 					icon={
-						<Icon name='logout'size={32} color='#F9A826'/>}
+						<Icon name='logout'size={32} color='#E8CA6F'/>}
 						onPress={() => logout()}
 						title=""
 						color="#fff"

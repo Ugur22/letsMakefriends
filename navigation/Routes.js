@@ -25,7 +25,7 @@ const Routes = () => {
 	}, []);
 
 	if (loading) {
-    return 	<Friends height={300} width={300} />;
+    return 	<Text >Loading..</Text>;
   }
 	
 	if(initializing) return null;

@@ -16,13 +16,13 @@ const SignupScreen = ({navigation}) => {
 		<View style={styles.container}>
 			<SignUpImage height={300} width={300} />
 			<Text style={styles.header} >Create an account</Text>
-			<Input labelValue={email} onChangeText={(userEmail) => setEmail(userEmail)}  leftIcon={ <Icon name='child'size={24} color='#F9A826'/>} keyboardType="email-address" autoCapitalize="none" 
+			<Input labelValue={email} onChangeText={(userEmail) => setEmail(userEmail)}  leftIcon={ <Icon name='child'size={24} color='#E8CA6F'/>} keyboardType="email-address" autoCapitalize="none" 
 			inputContainerStyle={{marginHorizontal:20}} placeholder="email" />
-			<Input labelValue={password} onChangeText={(userPassword) => setPassword(userPassword)} leftIcon={ <Icon name='key'size={24} color='#F9A826'/>} 
+			<Input labelValue={password} onChangeText={(userPassword) => setPassword(userPassword)} leftIcon={ <Icon name='key'size={24} color='#E8CA6F'/>} 
 			inputContainerStyle={{marginHorizontal:20}} placeholder="Password" secureTextEntry={true} />
 			<View style={{alignItems:'center',justifyContent:'center'}}>
 				<Button buttonStyle={styles.button} title="register" onPress={() => register(email,password)}/>
-				<Button titleStyle={{color: '#F9A826',fontStyle:'italic',textDecorationLine:'underline'}} 
+				<Button titleStyle={{color: '#E8CA6F',fontStyle:'italic',textDecorationLine:'underline'}} 
 				type="clear" title="Have an account? sign in" onPress={() => navigation.navigate('Login')}/>
 			</View>
 		</View>
