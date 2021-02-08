@@ -4,24 +4,26 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {AuthContext} from '../navigation/AuthProvider';
-import {styles} from '../utils/style';
+import {colors} from '../style/colors';
+import {Text} from 'react-native';
+import {styles} from '../style/style';
 
 const Stack = createStackNavigator();
 
 const AppStack = () => {
-	const {logout} = useContext(AuthContext);
+	const {logout,user} = useContext(AuthContext);
 
   return (
 		<Stack.Navigator >
 			<Stack.Screen name="Home" component={HomeScreen} options={({navigation}) => ({
-				title:'',
+				title:<Text style={styles.subtitle} >{user.email}</Text> ,
 				headerRight: () => (
 					<Button buttonStyle={{backgroundColor:'transparent'}}
 					icon={
-						<Icon name='logout'size={32} color='#E8CA6F'/>}
+						<Icon name='logout'size={32} color={colors.primary}/>}
 						onPress={() => logout()}
 						title=""
-						color="#fff"
+						color={colors.secondary}
 					/>
 				),
 				headerStyle: {

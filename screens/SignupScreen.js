@@ -2,7 +2,8 @@ import React, { useContext, useState }  from 'react';
 import {View,Text} from 'react-native';
 import { Button, Header,Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {styles} from '../utils/style';
+import {colors} from '../style/colors';
+import {styles} from '../style/style';
 import {AuthContext} from '../navigation/AuthProvider';
 import SignUpImage from '../assets/images/undraw_sign_in_e6hj.svg';
 
@@ -15,14 +16,13 @@ const SignupScreen = ({navigation}) => {
 	return (
 		<View style={styles.container}>
 			<SignUpImage height={300} width={300} />
-			<Text style={styles.header} >Create an account</Text>
-			<Input labelValue={email} onChangeText={(userEmail) => setEmail(userEmail)}  leftIcon={ <Icon name='child'size={24} color='#E8CA6F'/>} keyboardType="email-address" autoCapitalize="none" 
+			<Input labelValue={email} onChangeText={(userEmail) => setEmail(userEmail)}  leftIcon={ <Icon name='child'size={24} color={colors.primary} />} keyboardType="email-address" autoCapitalize="none" 
 			inputContainerStyle={{marginHorizontal:20}} placeholder="email" />
-			<Input labelValue={password} onChangeText={(userPassword) => setPassword(userPassword)} leftIcon={ <Icon name='key'size={24} color='#E8CA6F'/>} 
+			<Input labelValue={password} onChangeText={(userPassword) => setPassword(userPassword)} leftIcon={ <Icon name='key'size={24} color={colors.primary}/>} 
 			inputContainerStyle={{marginHorizontal:20}} placeholder="Password" secureTextEntry={true} />
 			<View style={{alignItems:'center',justifyContent:'center'}}>
 				<Button buttonStyle={styles.button} title="register" onPress={() => register(email,password)}/>
-				<Button titleStyle={{color: '#E8CA6F',fontStyle:'italic',textDecorationLine:'underline'}} 
+				<Button titleStyle={{color: colors.primary,fontStyle:'italic',textDecorationLine:'underline'}} 
 				type="clear" title="Have an account? sign in" onPress={() => navigation.navigate('Login')}/>
 			</View>
 		</View>

@@ -2,7 +2,8 @@ import React, { useContext }  from 'react';
 import {View,Text} from 'react-native';
 import { Button, Header,Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {styles} from '../utils/style';
+import {styles} from '../style/style';
+import {colors} from '../style/colors';
 import {AuthContext} from '../navigation/AuthProvider';
 import HomeImage from '../assets/images/undraw_Personal_goals_re_iow7.svg';
 
@@ -16,22 +17,22 @@ const HomeScreen = ({navigation}) => {
 			{/* <Text style={styles.header} >Welcome {user.email}</Text> */}
 				<Text style={styles.header}>Welcome to chapter one </Text>
 				<Text style={styles.header}>Pity party</Text>
-				<Text style={{fontSize:20,paddingTop:10}}>focusing on:</Text>
+				<Text style={styles.header}>focusing on:</Text>
 				<View style={{flexDirection: 'row',paddingTop:5}}>
-					<Text>{'\u2022'}</Text>
-					<Text >{'confidence'}</Text>
+					<Text style={{color: colors.primary}}>{'\u2022'}</Text>
+					<Text style={{color: colors.primary}}>{'confidence'}</Text>
     		</View>
 				<View style={{flexDirection: 'row',paddingTop:5}}>
-					<Text>{'\u2022'}</Text>
-					<Text>{'anxiety'}</Text>
+					<Text style={{color: colors.primary}}>{'\u2022'}</Text>
+					<Text style={{color: colors.primary}}>{'anxiety'}</Text>
     		</View>
 				<View style={{flexDirection: 'row',paddingTop:5}}>
-					<Text>{'\u2022'}</Text>
-					<Text>{'comfort'}</Text>
+					<Text style={{color: colors.primary}}>{'\u2022'}</Text>
+					<Text style={{color: colors.primary}}>{'comfort'}</Text>
     		</View>
 			</View>
 			<View style={styles.bottom}>
-				<Button titleStyle={{color: '#FFF'}} buttonStyle={styles.full_button} title="I'm ready to start my journey" onPress={() => alert('Hello')}/>
+				<Button titleStyle={{color: colors.tertiary,}} buttonStyle={styles.full_button} title="I'm ready to start my journey" onPress={() => alert('Hello')}/>
 			</View>
 		</View>
 	)
