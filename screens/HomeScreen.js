@@ -1,7 +1,6 @@
 import React, { useContext }  from 'react';
 import {View,Text} from 'react-native';
 import { Button, Header,Input } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import {styles} from '../style/style';
 import {colors} from '../style/colors';
 import {AuthContext} from '../navigation/AuthProvider';

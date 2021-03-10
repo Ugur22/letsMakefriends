@@ -5,6 +5,11 @@ export const styles = StyleSheet.create({
 	container: {
 		flex:1,
 		alignItems:'center',
+		justifyContent:'center'
+	},
+	center: {
+		flex:1,
+		alignItems:'center',
 		justifyContent:'center',
 	},
 	logo: {
@@ -18,7 +23,8 @@ export const styles = StyleSheet.create({
 		backgroundColor: colors.primary,
 		color: colors.tertiary,
 		margin: 10,
-		width: 200
+		width: 200,
+		fontFamily:'PlayfairDisplay-Medium',
 	},
 	full_button: {
 		backgroundColor: colors.primary,
@@ -37,16 +43,35 @@ export const styles = StyleSheet.create({
 	header: {
 		fontSize:24,
 		color: colors.primary,
+		textAlign: 'center',
+		fontFamily:'PlayfairDisplay-Medium'
 	},
 	subtitle: {
-		fontSize:16,
+		fontSize:18,
 		color: colors.primary,
-		paddingTop:10
+		paddingTop:10,
+		paddingHorizontal:10,
+		textAlign: 'center',
+		fontFamily:'PlayfairDisplay-Medium'
 	},
 	text: {
 		fontSize:14,
 		color: colors.primary,
 		paddingHorizontal:20,
+		fontFamily:'PlayfairDisplay-Medium',
 		textAlign: 'center'
-	}
+	},
+	item: {
+    padding: 10,
+    marginVertical: 8,
+		flex:1,
+    marginHorizontal: 10,
+  },
+  title: {
+		paddingTop:5,
+    fontSize: 22,
+		textAlign:'center',
+		fontFamily:'PlayfairDisplay-Medium',
+		color: colors.primary,
+  },
 });

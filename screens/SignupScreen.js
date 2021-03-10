@@ -1,31 +1,43 @@
 import React, { useContext, useState }  from 'react';
-import {View,Text} from 'react-native';
-import { Button, Header,Input } from 'react-native-elements';
+import {View,ScrollView,SafeAreaView} from 'react-native';
+import { Button,Input,Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {colors} from '../style/colors';
 import {styles} from '../style/style';
 import {AuthContext} from '../navigation/AuthProvider';
-import SignUpImage from '../assets/images/undraw_sign_in_e6hj.svg';
+import DatePicker from 'react-native-date-picker'
 
 const SignupScreen = ({navigation}) => {
 
 	const {register} = useContext(AuthContext);
 	const [email,setEmail] = useState();
 	const [password,setPassword] = useState();
+	let [date, setDate] = useState(new Date('1998-10-10'));
+
 
 	return (
-		<View style={styles.container}>
-			<SignUpImage height={300} width={300} />
-			<Input labelValue={email} onChangeText={(userEmail) => setEmail(userEmail)}  leftIcon={ <Icon name='child'size={24} color={colors.primary} />} keyboardType="email-address" autoCapitalize="none" 
-			inputContainerStyle={{marginHorizontal:20}} placeholder="email" />
-			<Input labelValue={password} onChangeText={(userPassword) => setPassword(userPassword)} leftIcon={ <Icon name='key'size={24} color={colors.primary}/>} 
-			inputContainerStyle={{marginHorizontal:20}} placeholder="Password" secureTextEntry={true} />
-			<View style={{alignItems:'center',justifyContent:'center'}}>
-				<Button buttonStyle={styles.button} title="register" onPress={() => register(email,password)}/>
-				<Button titleStyle={{color: colors.primary,fontStyle:'italic',textDecorationLine:'underline'}} 
-				type="clear" title="Have an account? sign in" onPress={() => navigation.navigate('Login')}/>
+		<SafeAreaView style={{flex:1}}>
+			<ScrollView >
+			<View style={{marginBottom:20}}>
 			</View>
-		</View>
+			<Input labelValue='Name' leftIcon={ <Icon name='child'size={24} color={colors.primary}/>} 
+					inputContainerStyle={{marginHorizontal:20}} placeholder="Name" />
+					<Text style={styles.subtitle} >birthday</Text>
+					<View style={{alignItems:'center',justifyContent:'center'}}>
+			<DatePicker date={date} onDateChange={setDate} androidVariant="nativeAndroid" mode="date" />
+			</View>
+
+			<Text style={styles.header} >account information</Text>
+			<Input labelValue={email} onChangeText={(userEmail) => setEmail(userEmail)}  leftIcon={ <Icon name='envelope'size={24} color={colors.primary} />} keyboardType="email-address" autoCapitalize="none" 
+				inputContainerStyle={{marginHorizontal:20}} placeholder="email" />
+				<Input labelValue={password} onChangeText={(userPassword) => setPassword(userPassword)} leftIcon={ <Icon name='key'size={24} color={colors.primary}/>} 
+				inputContainerStyle={{marginHorizontal:20}} placeholder="Password" secureTextEntry={true} />
+
+			<View style={styles.center}>
+				<Button titleStyle={{fontFamily:'PlayfairDisplay-Medium',fontSize:18}} buttonStyle={styles.button} title="Next" onPress={() => navigation.navigate('Skills')}/>
+			</View>
+			</ScrollView>
+		</SafeAreaView>
 	)
 }
 
