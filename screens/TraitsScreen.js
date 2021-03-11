@@ -1,10 +1,13 @@
-import React, { useContext, useState }  from 'react';
+import React, { useEffect, useState }  from 'react';
 import {View,ScrollView,SafeAreaView,FlatList,Image} from 'react-native';
 import { Button,Input,Text,ListItem } from 'react-native-elements';
 import {colors} from '../style/colors';
 import {styles} from '../style/style';
+import firestore from '@react-native-firebase/firestore';
 
 const TraitsScreen = ({navigation}) => {
+
+	const [traitsList, setTraitsList] = useState([]);
 
 	const DATA = [
 		{
@@ -44,13 +47,39 @@ const TraitsScreen = ({navigation}) => {
 		},
 	];
 
+	const getTraits = async () => {
+
+    try {
+			const list = [];
+      firestore().collection("traits").get().then((querySnapshot) => {
+				querySnapshot.forEach(doc =>{
+					const {imgUrl,name,selected} = doc.data();
+					list.push({
+						id:doc.id,
+						title:name,
+						avatar_url:imgUrl,
+						selected:selected
+					});
+				});
+				setTraitsList([...list]);
+			});
+    } catch (e) {
+			console.log(e);
+    }
+	}
+
+		//Call when component is rendered
+		useEffect(() => {
+			getTraits();
+		}, []);
+
 	const Item = ({ title,avatar }) => (
 		<View style={styles.item}>
 			<Image
-        style={{width:150,height:150,
-					borderRadius:100,borderWidth:3,borderColor:colors.primary}}
-        source={ avatar }
-      />
+					style={{width:150,height:150,
+						borderRadius:100,borderWidth:3,borderColor:colors.primary}}
+						source={{uri: avatar}}
+				/>
 			<Text style={styles.title}>{title}</Text>
 		</View>
 	);
@@ -66,7 +95,7 @@ const TraitsScreen = ({navigation}) => {
 			<ScrollView stickyHeaderIndices={[4]}>
 				<View>
 					<FlatList
-						data={DATA}
+						data={traitsList}
 						numColumns={2}
 						renderItem={renderItem}
 						keyExtractor={item => item.id}
