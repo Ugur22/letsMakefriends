@@ -8,6 +8,7 @@ import firestore from '@react-native-firebase/firestore';
 const TraitsScreen = ({navigation}) => {
 
 	const [traitsList, setTraitsList] = useState([]);
+	const [loading,setLoading] = useState(true);
 
 	const DATA = [
 		{
@@ -71,6 +72,7 @@ const TraitsScreen = ({navigation}) => {
 		//Call when component is rendered
 		useEffect(() => {
 			getTraits();
+			setLoading(false);
 		}, []);
 
 	const Item = ({ title,avatar }) => (
@@ -92,6 +94,7 @@ const TraitsScreen = ({navigation}) => {
 
 	return (
 		<SafeAreaView style={{flex:1}}>
+			{traitsList.length > 0 && (
 			<ScrollView stickyHeaderIndices={[4]}>
 				<View>
 					<FlatList
@@ -105,6 +108,12 @@ const TraitsScreen = ({navigation}) => {
 					<Button titleStyle={{fontFamily:'PlayfairDisplay-Medium',fontSize:18}}  buttonStyle={styles.button} title="Finish" onPress={() => register(email,password)}/>
 				</View>
 			</ScrollView>
+				)}	
+				{traitsList.length === 0 && (
+					<View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+						<Image source={{ uri: 'https://mir-s3-cdn-cf.behance.net/project_modules/disp/04de2e31234507.564a1d23645bf.gif' }} style={{ height: 80, width: 60, }}/>
+					</View>
+				)}
 		</SafeAreaView>
 	)
 }
