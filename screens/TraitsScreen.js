@@ -48,7 +48,8 @@ const TraitsScreen = ({route,navigation}) => {
 					list.push(trait.title);
 				}
 			});
-			register(user);
+
+			register(user.user.email,user.user.password,list,user.skills,user.user.name,user.user.date);
 		 }
 
 		const Item = ({ title,avatar,item,index, selected }) => (

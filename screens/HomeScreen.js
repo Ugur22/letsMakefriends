@@ -1,19 +1,29 @@
-import React, { useContext }  from 'react';
+import React, { useContext,useState,useEffect }  from 'react';
 import {View,Text} from 'react-native';
 import { Button, Header,Input } from 'react-native-elements';
 import {styles} from '../style/style';
 import {colors} from '../style/colors';
 import {AuthContext} from '../navigation/AuthProvider';
 import HomeImage from '../assets/images/undraw_Personal_goals_re_iow7.svg';
+import firestore from '@react-native-firebase/firestore';
 
 const HomeScreen = ({navigation}) => {
 	const {user,logout} = useContext(AuthContext);
+	const [UserList, setUserList] = useState([]);
+
+		useEffect(() => {
+			firestore().collection('Users').doc(user.uid).get().then(documentSnapshot => {
+				console.log('User exists: ', documentSnapshot.exists);
+				if (documentSnapshot.exists) {
+					console.log('User data: ', documentSnapshot.data());
+				}
+			});
+		},[]);
 
 	return (
 		<View style={styles.container}>
 			<HomeImage height={300} width={300} />
 			<View style={{alignItems:'center',justifyContent:'center', paddingHorizontal:60}}>
-			{/* <Text style={styles.header} >Welcome {user.email}</Text> */}
 				<Text style={styles.header}>Welcome to chapter one </Text>
 				<Text style={styles.header}>Pity party</Text>
 				<Text style={styles.header}>focusing on:</Text>

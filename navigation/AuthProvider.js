@@ -1,4 +1,6 @@
 import React, {createContext, useState} from 'react';
+import firebase from '@react-native-firebase/app';
+import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
 import {Alert} from 'react-native';
@@ -44,14 +46,39 @@ export const AuthProvider = ({children}) => {
 						);
           }
         },
-        register: async (email, password) => {
+        register: async (email, password,traits,skills,name,date) => {
           try {
 						if(email === undefined || password === undefined || email === '' || password === ''){
 							alert("Email or password is empty");
 						}else{
-							await auth().createUserWithEmailAndPassword(email, password);
+							await auth().createUserWithEmailAndPassword(email, password).then((user) => {
+								try {
+									firestore()
+									.collection('Users').
+									doc(user.user.uid)
+									.set({
+										email: email,
+										name:name,
+										birthdate:date,
+										traits:traits,
+										skills:skills,
+									})
+									.then(() => {
+										console.log('User added!');
+									});
+								} catch (e) {
+									console.log(e);
+								}
+							});
 						}
           } catch (e) {
+						if (error.code === 'auth/email-already-in-use') {
+							('That email address is already in use!');
+						}
+
+						if (error.code === 'auth/invalid-email') {
+							alert('That email address is invalid!');
+						}
            alert('create user failed');
           }
         },
