@@ -1,52 +1,18 @@
-import React, { useEffect, useState }  from 'react';
-import {View,ScrollView,SafeAreaView,FlatList,Image} from 'react-native';
-import { Button,Input,Text,ListItem } from 'react-native-elements';
+import React, { useEffect,useContext, useState }  from 'react';
+import {View,ScrollView,SafeAreaView,FlatList,Image,TouchableOpacity} from 'react-native';
+import { Button,Input,Text } from 'react-native-elements';
 import {colors} from '../style/colors';
 import {styles} from '../style/style';
 import firestore from '@react-native-firebase/firestore';
+import {AuthContext} from '../navigation/AuthProvider';
 
-const TraitsScreen = ({navigation}) => {
+const TraitsScreen = ({route,navigation}) => {
 
 	const [traitsList, setTraitsList] = useState([]);
 	const [loading,setLoading] = useState(true);
+	const {register} = useContext(AuthContext);
 
-	const DATA = [
-		{
-			id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-			title: 'Friendly',
-			avatar_url: require('../assets/images/undraw_true_friends_c94g.png'),
-		},
-		{
-			id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-			title: 'Confidence',
-			avatar_url: require('../assets/images/undraw_true_friends_c94g.png'),
-
-		},
-		{
-			id: '58694a0f-3da1-471f-bd96-145571e29d72',
-			title: 'Ambitious',
-					avatar_url: require('../assets/images/undraw_true_friends_c94g.png'),
-
-		},
-		{
-			id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-			title: 'Optimistic',
-					avatar_url: require('../assets/images/undraw_true_friends_c94g.png'),
-
-		},
-		{
-			id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-			title: 'Engaging',
-					avatar_url: require('../assets/images/undraw_true_friends_c94g.png'),
-
-		},
-		{
-			id: '58694a0f-3da1-471f-bd96-145571e29d72',
-			title: 'Curious',
-			avatar_url: require('../assets/images/undraw_true_friends_c94g.png'),
-
-		},
-	];
+	const userData = route.params;
 
 	const getTraits = async () => {
 
@@ -75,20 +41,47 @@ const TraitsScreen = ({navigation}) => {
 			setLoading(false);
 		}, []);
 
-	const Item = ({ title,avatar }) => (
-		<View style={styles.item}>
-			<Image
-					style={{width:150,height:150,
-						borderRadius:100,borderWidth:3,borderColor:colors.primary}}
-						source={{uri: avatar}}
-				/>
-			<Text style={styles.title}>{title}</Text>
-		</View>
-	);
+		const FinishRegister = (user) => {
+			let list = [];
+			traitsList.map(trait =>{
+				if(trait.selected){
+					list.push(trait.title);
+				}
+			});
+			register(user);
+		 }
 
-	const renderItem = ({ item }) => (
-    <Item title={item.title} avatar={item.avatar_url}  />
-  );
+		const Item = ({ title,avatar,item,index, selected }) => (
+			<View style={styles.item} >
+				<TouchableOpacity 	onPress={() => onChangeValue(item,index)}>
+					<Image
+						style={{width:150,height:150,
+							borderRadius:100,borderWidth:3,borderColor:selected ? colors.tertiary : colors.primary }}
+							source={{uri: avatar}}
+					/>
+				</TouchableOpacity>
+				<Text style={styles.title}>{title}</Text>
+			</View>
+		);
+	
+		const renderItem = ({ item,index }) => (
+			<Item title={item.title} avatar={item.avatar_url}  item={item} index={index} selected={item.selected}/>
+		);
+
+	const onChangeValue = (item, index) => {
+		const newData = traitsList.map(newItem => {
+			if(newItem.id == item.id){
+				newItem.selected = !newItem.selected 
+				return {
+					...newItem,
+				}
+			}
+			 return {
+				 ...newItem,
+			 }
+		})
+		setTraitsList(newData);
+	}
 
 	
 
@@ -105,7 +98,7 @@ const TraitsScreen = ({navigation}) => {
 						/>
 				</View>
 				<View style={styles.center}>
-					<Button titleStyle={{fontFamily:'PlayfairDisplay-Medium',fontSize:18}}  buttonStyle={styles.button} title="Finish" onPress={() => register(email,password)}/>
+					<Button titleStyle={{fontFamily:'PlayfairDisplay-Medium',fontSize:18}}  buttonStyle={styles.button} title="Finish" onPress={() => FinishRegister(userData)}/>
 				</View>
 			</ScrollView>
 				)}	

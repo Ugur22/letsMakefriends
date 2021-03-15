@@ -1,16 +1,15 @@
-import React, { useContext, useState }  from 'react';
+import React, { useState }  from 'react';
 import {View,ScrollView,SafeAreaView} from 'react-native';
 import { Button,Input,Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {colors} from '../style/colors';
 import {styles} from '../style/style';
-import {AuthContext} from '../navigation/AuthProvider';
 import DatePicker from 'react-native-date-picker'
 import {formatDate} from "../utils/dates";
 
 const SignupScreen = ({navigation}) => {
 
-	const {register} = useContext(AuthContext);
+
 	const [email,setEmail] = useState();
 	const [password,setPassword] = useState();
 	const [name,setName] = useState();

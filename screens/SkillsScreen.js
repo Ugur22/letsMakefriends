@@ -1,11 +1,10 @@
 import React, { useEffect,useState }  from 'react';
-import {View,ScrollView,SafeAreaView,FlatList,Image} from 'react-native';
-import { Button,Input,Text } from 'react-native-elements';
+import {View,ScrollView,SafeAreaView,FlatList,Image,TouchableOpacity} from 'react-native';
+import { Button,Input,Text,CheckBox } from 'react-native-elements';
 import {colors} from '../style/colors';
 import {styles} from '../style/style';
 import { LogBox } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
-import loadingImage from '../assets/images/giphy.gif';
 
 const SkillsScreen = ({route,navigation}) => {
 	LogBox.ignoreLogs(['VirtualizedLists should never be nested inside plain ScrollViews with the same orientation - use another VirtualizedList-backed container instead.']);
@@ -41,25 +40,49 @@ const SkillsScreen = ({route,navigation}) => {
 		setLoading(false);
   }, []);
 
-	const GotoPage = (user) => {
+	 const onChangeValue = (item, index) => {
+		 const newData = skillsList.map(newItem => {
+			 if(newItem.id == item.id){
+				 newItem.selected = !newItem.selected 
+				 return {
+					 ...newItem,
+				 }
+			 }
+				return {
+					...newItem,
+				}
+		 })
+		 setSkillsList(newData);
+	 }
+
+	 const GotoPage = (user) => {
+		let list = [];
+		skillsList.map(skill =>{
+			if(skill.selected){
+				list.push(skill.title);
+			}
+		});
 		navigation.navigate('Traits', {
 			user:user,
+			skills:list
 		});
  	}
 
-	const Item = ({ title,avatar }) => (
-		<View style={styles.item}>
-			<Image
-        style={{width:150,height:150,
-					borderRadius:100,borderWidth:3,borderColor:colors.primary}}
-					source={{uri: avatar}}
-      />
+	const Item = ({ title,avatar,item,index,selected }) => (
+		<View style={styles.item} >
+			<TouchableOpacity 	onPress={() => onChangeValue(item,index)}>
+				<Image
+					style={{width:150,height:150,
+						borderRadius:100,borderWidth:3,borderColor:selected ? colors.tertiary : colors.primary }}
+						source={{uri: avatar}}
+				/>
+			</TouchableOpacity>
 			<Text style={styles.title}>{title}</Text>
 		</View>
 	);
 
-	const renderItem = ({ item }) => (
-    <Item title={item.title} avatar={item.avatar_url}  />
+	const renderItem = ({ item,index }) => (
+    <Item title={item.title} avatar={item.avatar_url} item={item} index={index} selected={item.selected}/>
   );
 
 	return (
@@ -72,7 +95,7 @@ const SkillsScreen = ({route,navigation}) => {
 						data={skillsList}
 						numColumns={2}
 						renderItem={renderItem}
-						keyExtractor={item => item.id}
+						keyExtractor={item => `key-${item.id}`}
 						/>
 				</View>
 				<View style={styles.center}>
