@@ -9,13 +9,12 @@ import firestore from '@react-native-firebase/firestore';
 
 const HomeScreen = ({navigation}) => {
 	const {user,logout} = useContext(AuthContext);
-	const [UserList, setUserList] = useState([]);
+	const [UserData, setUserData] = useState([]);
 
 		useEffect(() => {
 			firestore().collection('Users').doc(user.uid).get().then(documentSnapshot => {
-				console.log('User exists: ', documentSnapshot.exists);
 				if (documentSnapshot.exists) {
-					console.log('User data: ', documentSnapshot.data());
+					setUserData(documentSnapshot.data());
 				}
 			});
 		},[]);
