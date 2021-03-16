@@ -1,5 +1,5 @@
 import React, { useContext,useState,useEffect }  from 'react';
-import {View,Text} from 'react-native';
+import {View,Text,SafeAreaView,Image} from 'react-native';
 import { Button, Header,Input } from 'react-native-elements';
 import {styles} from '../style/style';
 import {colors} from '../style/colors';
@@ -10,39 +10,62 @@ import firestore from '@react-native-firebase/firestore';
 const HomeScreen = ({navigation}) => {
 	const {user,logout} = useContext(AuthContext);
 	const [UserData, setUserData] = useState([]);
+	const [chapterData, setChapterData] = useState([]);
+	const [loading,setLoading] = useState(true);
 
-		useEffect(() => {
-			firestore().collection('Users').doc(user.uid).get().then(documentSnapshot => {
+	const getChapterInfo = async (chapter) => {
+		try {
+			await	firestore().collection('chapters').where("number", "==", chapter).get().then(snapshot => {
+				setChapterData(snapshot.docs[0].data());
+			
+				});
+				setLoading(false);
+		} catch (e) {
+			console.log(e);
+		}
+	}
+
+	const getUserData = async () => {
+		try {
+			await firestore().collection('Users').doc(user.uid).get().then(documentSnapshot => {
 				if (documentSnapshot.exists) {
-					setUserData(documentSnapshot.data());
+					getChapterInfo(documentSnapshot.data().chapter);
 				}
 			});
+		} catch (e) {
+			console.log(e);
+		}
+	}
+		useEffect(() => {
+			getUserData();
 		},[]);
 
 	return (
-		<View style={styles.container}>
-			<HomeImage height={300} width={300} />
-			<View style={{alignItems:'center',justifyContent:'center', paddingHorizontal:60}}>
-				<Text style={styles.header}>Welcome to chapter one </Text>
-				<Text style={styles.header}>Pity party</Text>
-				<Text style={styles.header}>focusing on:</Text>
-				<View style={{flexDirection: 'row',paddingTop:5}}>
-					<Text style={{color: colors.primary}}>{'\u2022'}</Text>
-					<Text style={{color: colors.primary}}>{'confidence'}</Text>
-    		</View>
-				<View style={{flexDirection: 'row',paddingTop:5}}>
-					<Text style={{color: colors.primary}}>{'\u2022'}</Text>
-					<Text style={{color: colors.primary}}>{'anxiety'}</Text>
-    		</View>
-				<View style={{flexDirection: 'row',paddingTop:5}}>
-					<Text style={{color: colors.primary}}>{'\u2022'}</Text>
-					<Text style={{color: colors.primary}}>{'comfort'}</Text>
-    		</View>
+		<SafeAreaView style={{flex:1}}>
+		{!loading && (
+			<View style={styles.container}>
+				<HomeImage height={300} width={300} />
+				<View style={{alignItems:'center',justifyContent:'center', paddingHorizontal:20}}>
+					<Text style={styles.header}>Welcome to {chapterData.name}</Text>
+					<Text style={styles.header}>Tasks:</Text>
+					{chapterData.tasks.map((task, index) => (
+					<View style={{flexDirection: 'row',paddingTop:10}} key={index} >
+						<Text style={{color: colors.primary,fontSize:16}}>{'\u2022'}</Text>
+						<Text style={{color: colors.primary, fontSize:16}}>{task}</Text>
+					</View>
+					))}
+				</View>
+				<View style={styles.bottom}>
+					<Button titleStyle={{color: colors.tertiary,}} buttonStyle={styles.full_button} title="I'm ready to start my journey" onPress={() => alert('Hello')}/>
+				</View>
 			</View>
-			<View style={styles.bottom}>
-				<Button titleStyle={{color: colors.tertiary,}} buttonStyle={styles.full_button} title="I'm ready to start my journey" onPress={() => alert('Hello')}/>
-			</View>
-		</View>
+			)}	
+			{loading &&  (
+				<View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+					<Image source={{ uri: 'https://mir-s3-cdn-cf.behance.net/project_modules/disp/04de2e31234507.564a1d23645bf.gif' }} style={{ height: 80, width: 60, }}/>
+				</View>
+			)}
+		</SafeAreaView>
 	)
 }
 

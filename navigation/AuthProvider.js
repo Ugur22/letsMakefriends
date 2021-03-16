@@ -62,6 +62,7 @@ export const AuthProvider = ({children}) => {
 										birthdate:date,
 										traits:traits,
 										skills:skills,
+										chapter:1
 									})
 									.then(() => {
 										console.log('User added!');
@@ -71,15 +72,14 @@ export const AuthProvider = ({children}) => {
 								}
 							});
 						}
-          } catch (e) {
+          } catch (error) {
 						if (error.code === 'auth/email-already-in-use') {
-							('That email address is already in use!');
+							alert('That email address is already in use!');
 						}
 
 						if (error.code === 'auth/invalid-email') {
 							alert('That email address is invalid!');
 						}
-           alert('create user failed');
           }
         },
         logout: async () => {
