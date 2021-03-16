@@ -43,6 +43,7 @@ export const styles = StyleSheet.create({
 	header: {
 		fontSize:24,
 		color: colors.primary,
+		padding:5,
 		textAlign: 'center',
 		fontFamily:'PlayfairDisplay-Medium'
 	},

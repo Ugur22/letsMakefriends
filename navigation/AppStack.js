@@ -1,5 +1,6 @@
 import React, { useContext,useState,useEffect } from 'react';
 import HomeScreen from '../screens/HomeScreen';
+import ChapterScreen from '../screens/ChapterScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -35,6 +36,20 @@ const AppStack = () => {
 						title=""
 						color={colors.secondary}
 					/>
+				),
+				headerStyle: {
+					backgroundColor:'#f2f2f2',
+					shadowColor:'#f2f2f2',
+					elevation:0
+				}
+			})}/>
+			<Stack.Screen name="Chapter" component={ChapterScreen} options={({navigation}) => ({
+				title:'' ,
+				headerRight: () => (
+					<Text style={styles.subtitle}>Chapter one</Text>
+				),
+				headerLeft: () => (
+					<Text style={styles.subtitle}>14-02-2020</Text>
 				),
 				headerStyle: {
 					backgroundColor:'#f2f2f2',

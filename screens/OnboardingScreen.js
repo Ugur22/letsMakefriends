@@ -24,7 +24,7 @@ const OnboardingScreen = ({navigation}) => {
 				{
 					backgroundColor: colors.secondary,
 					image: 	<Friend height={300} width={300} />,
-					title: 	<Text style={styles.header}>What is the goal of ${Appname}?</Text>,
+					title: 	<Text style={styles.header}>What is the goal of {Appname}?</Text>,
 					subtitle: <Text style={styles.text}>We have created 9 chapters to guide you through your process. Each chapter
 					 comes with tasks and information to educate and guide you along the way</Text>
 				},

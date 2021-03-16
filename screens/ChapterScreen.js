@@ -4,21 +4,19 @@ import { Button, Header,Input } from 'react-native-elements';
 import {styles} from '../style/style';
 import {colors} from '../style/colors';
 import {AuthContext} from '../navigation/AuthProvider';
-import HomeImage from '../assets/images/undraw_Personal_goals_re_iow7.svg';
 import firestore from '@react-native-firebase/firestore';
 
-const HomeScreen = ({navigation}) => {
+const ChapterScreen = ({navigation}) => {
 	const {user,logout} = useContext(AuthContext);
 	const [UserData, setUserData] = useState([]);
 	const [chapterData, setChapterData] = useState([]);
-	const [loading,setLoading] = useState(true);
+	const [loading,setLoading] = useState(false);
 
 	const getChapterInfo = async (chapter) => {
-
 		try {
-
 			await	firestore().collection('chapters').where("number", "==", chapter).get().then(snapshot => {
 				setChapterData(snapshot.docs[0].data());
+			
 				});
 				setLoading(false);
 		} catch (e) {
@@ -31,7 +29,6 @@ const HomeScreen = ({navigation}) => {
 			await firestore().collection('Users').doc(user.uid).get().then(documentSnapshot => {
 				if (documentSnapshot.exists) {
 					getChapterInfo(documentSnapshot.data().chapter);
-					
 				}
 			});
 		} catch (e) {
@@ -39,26 +36,16 @@ const HomeScreen = ({navigation}) => {
 		}
 	}
 		useEffect(() => {
-			getUserData();
+			// getUserData();
 		},[]);
 
 	return (
 		<SafeAreaView style={{flex:1}}>
 		{!loading && (
 			<View style={styles.container}>
-				<HomeImage height={300} width={300} />
-				<View style={{alignItems:'center',justifyContent:'center', paddingHorizontal:20}}>
-					<Text style={styles.header}>Welcome to {chapterData.name}</Text>
-					<Text style={styles.header}>Tasks:</Text>
-					{chapterData.tasks.map((task, index) => (
-					<View style={{flexDirection: 'row',paddingTop:10}} key={index} >
-						<Text style={{color: colors.primary,fontSize:16}}>{'\u2022'}</Text>
-						<Text style={{color: colors.primary, fontSize:16}}>{task}</Text>
-					</View>
-					))}
-				</View>
+
 				<View style={styles.bottom}>
-					<Button titleStyle={{color: colors.tertiary,}} buttonStyle={styles.full_button} title="I'm ready to start my journey" onPress={() => navigation.navigate('Chapter')}/>
+					<Button titleStyle={{color: colors.tertiary,}} buttonStyle={styles.full_button} title="LetsBeFriends" onPress={() => alert('Hello')}/>
 				</View>
 			</View>
 			)}	
@@ -71,4 +58,4 @@ const HomeScreen = ({navigation}) => {
 	)
 }
 
-export default HomeScreen;
+export default ChapterScreen;
