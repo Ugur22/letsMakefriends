@@ -31,6 +31,7 @@ export const styles = StyleSheet.create({
 		margin:10,
 		fontSize:20,
 		padding:20,
+		zIndex:1000
 	},
 	bottom: {
 		flex: 1,
@@ -42,12 +43,20 @@ export const styles = StyleSheet.create({
 	},	
 	header: {
 		fontSize:24,
-		color: colors.primary,
+		color: colors.tertiary,
 		padding:5,
 		textAlign: 'center',
 		fontFamily:'PlayfairDisplay-Medium'
 	},
 	subtitle: {
+		fontSize:18,
+		color: colors.tertiary,
+		paddingTop:10,
+		paddingHorizontal:10,
+		textAlign: 'center',
+		fontFamily:'PlayfairDisplay-Medium'
+	},
+	subtitleInvert: {
 		fontSize:18,
 		color: colors.primary,
 		paddingTop:10,
@@ -57,7 +66,7 @@ export const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize:14,
-		color: colors.primary,
+		color: colors.tertiary,
 		paddingHorizontal:20,
 		fontFamily:'PlayfairDisplay-Medium',
 		textAlign: 'center'
@@ -73,6 +82,6 @@ export const styles = StyleSheet.create({
     fontSize: 22,
 		textAlign:'center',
 		fontFamily:'PlayfairDisplay-Medium',
-		color: colors.primary,
+		color: colors.tertiary,
   },
 });

@@ -1,5 +1,5 @@
 import React, { useContext,useState,useEffect }  from 'react';
-import {View,Text,SafeAreaView,Image} from 'react-native';
+import {View,Text,SafeAreaView,Image,ScrollView} from 'react-native';
 import { Button, Header,Input } from 'react-native-elements';
 import {styles} from '../style/style';
 import {colors} from '../style/colors';
@@ -13,19 +13,6 @@ const HomeScreen = ({navigation}) => {
 	const [chapterData, setChapterData] = useState([]);
 	const [loading,setLoading] = useState(true);
 
-	const getChapterInfo = async (chapter) => {
-
-		try {
-
-			await	firestore().collection('chapters').where("number", "==", chapter).get().then(snapshot => {
-				setChapterData(snapshot.docs[0].data());
-				});
-				setLoading(false);
-		} catch (e) {
-			console.log(e);
-		}
-	}
-
 	const getUserData = async () => {
 		try {
 			await firestore().collection('Users').doc(user.uid).get().then(documentSnapshot => {
@@ -38,6 +25,17 @@ const HomeScreen = ({navigation}) => {
 			console.log(e);
 		}
 	}
+
+	const getChapterInfo = async (chapter) => {
+		try {
+			const list =	await	firestore().collection('chapters').where("number", "==", chapter).get();
+			setChapterData(list.docs[0].data());
+			} catch (e) {
+				console.log(e);
+			}
+			setLoading(false);
+		}
+		
 		useEffect(() => {
 			getUserData();
 		},[]);
@@ -45,28 +43,30 @@ const HomeScreen = ({navigation}) => {
 	return (
 		<SafeAreaView style={{flex:1}}>
 		{!loading && (
-			<View style={styles.container}>
-				<HomeImage height={300} width={300} />
-				<View style={{alignItems:'center',justifyContent:'center', paddingHorizontal:20}}>
-					<Text style={styles.header}>Welcome to {chapterData.name}</Text>
-					<Text style={styles.header}>Tasks:</Text>
-					{chapterData.tasks.map((task, index) => (
-					<View style={{flexDirection: 'row',paddingTop:10}} key={index} >
-						<Text style={{color: colors.primary,fontSize:16}}>{'\u2022'}</Text>
-						<Text style={{color: colors.primary, fontSize:16}}>{task}</Text>
+			<ScrollView stickyHeaderIndices={[4]}>
+				<View style={styles.container}>
+					<HomeImage height={200} width={200} />
+					<View style={{alignItems:'center',justifyContent:'center', paddingHorizontal:20}}>
+						<Text style={styles.header}>Welcome to {chapterData.name}</Text>
+						<Text style={styles.header}>Tasks:</Text>
+						{chapterData.tasks.map((task, index) => (
+						<View style={{flexDirection: 'row',paddingTop:10}} key={index} >
+							<Text style={{color: colors.tertiary,fontSize:16}}>{'\u2022'}</Text>
+							<Text style={{color: colors.tertiary, fontSize:16}}>{task}</Text>
+						</View>
+						))}
 					</View>
-					))}
 				</View>
-				<View style={styles.bottom}>
-					<Button titleStyle={{color: colors.tertiary,}} buttonStyle={styles.full_button} title="I'm ready to start my journey" onPress={() => navigation.navigate('Chapter')}/>
-				</View>
-			</View>
+			</ScrollView>
 			)}	
 			{loading &&  (
 				<View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
 					<Image source={{ uri: 'https://mir-s3-cdn-cf.behance.net/project_modules/disp/04de2e31234507.564a1d23645bf.gif' }} style={{ height: 80, width: 60, }}/>
 				</View>
 			)}
+			<View style={styles.bottom}>
+				<Button titleStyle={{color: colors.tertiary,}} buttonStyle={styles.full_button} title="I'm ready to start my journey" onPress={() => navigation.navigate('Chapter')}/>
+			</View>
 		</SafeAreaView>
 	)
 }

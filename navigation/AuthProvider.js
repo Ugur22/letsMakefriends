@@ -62,7 +62,8 @@ export const AuthProvider = ({children}) => {
 										birthdate:date,
 										traits:traits,
 										skills:skills,
-										chapter:1
+										chapter:1,
+										xp:0
 									})
 									.then(() => {
 										console.log('User added!');

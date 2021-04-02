@@ -31,7 +31,7 @@ const AppStack = () => {
 				headerRight: () => (
 					<Button buttonStyle={{backgroundColor:'transparent'}}
 					icon={
-						<Icon name='logout'size={32} color={colors.primary}/>}
+						<Icon name='logout'size={32} color={colors.tertiary}/>}
 						onPress={() => logout()}
 						title=""
 						color={colors.secondary}
@@ -46,16 +46,18 @@ const AppStack = () => {
 			<Stack.Screen name="Chapter" component={ChapterScreen} options={({navigation}) => ({
 				title:'' ,
 				headerRight: () => (
-					<Text style={styles.subtitle}>Chapter one</Text>
+					<Text style={styles.subtitleInvert}>Chapter one</Text>
 				),
 				headerLeft: () => (
 					<Text style={styles.subtitle}>14-02-2020</Text>
 				),
 				headerStyle: {
-					backgroundColor:'#f2f2f2',
-					shadowColor:'#f2f2f2',
-					elevation:0
-				}
+					backgroundColor:'transparent',
+					elevation:0,
+          shadowOpacity: 0,
+          borderBottomWidth: 0,
+				},
+				
 			})}/>
 		</Stack.Navigator>
   );
