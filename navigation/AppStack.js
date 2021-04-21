@@ -1,6 +1,7 @@
 import React, { useContext,useState,useEffect } from 'react';
 import HomeScreen from '../screens/HomeScreen';
 import ChapterScreen from '../screens/ChapterScreen';
+import DiaryScreen from '../screens/DiaryScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -47,6 +48,22 @@ const AppStack = () => {
 				title:'' ,
 				headerRight: () => (
 					<Text style={styles.subtitleInvert}>Chapter one</Text>
+				),
+				headerLeft: () => (
+					<Text style={styles.subtitle}>14-02-2020</Text>
+				),
+				headerStyle: {
+					backgroundColor:'transparent',
+					elevation:0,
+          shadowOpacity: 0,
+          borderBottomWidth: 0,
+				},
+				
+			})}/>
+			<Stack.Screen name="Diary" component={DiaryScreen} options={({navigation}) => ({
+				title:'' ,
+				headerRight: () => (
+					<Text style={styles.subtitle}>Dairy</Text>
 				),
 				headerLeft: () => (
 					<Text style={styles.subtitle}>14-02-2020</Text>

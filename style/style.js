@@ -69,7 +69,6 @@ export const styles = StyleSheet.create({
 		color: colors.tertiary,
 		paddingHorizontal:20,
 		fontFamily:'PlayfairDisplay-Medium',
-		textAlign: 'center'
 	},
 	item: {
     padding: 10,
