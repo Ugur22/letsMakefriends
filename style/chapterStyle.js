@@ -11,6 +11,10 @@ export const ChapterStyle = StyleSheet.create({
     backgroundColor: 'transparent',
     flex: 1,
   },
+  checkbox: {
+    backgroundColor: 'transparent',
+    width: '100%',
+  },
   full_button: {
     backgroundColor: colors.primary,
     margin: 25,

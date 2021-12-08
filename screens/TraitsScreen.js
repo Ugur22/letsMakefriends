@@ -98,7 +98,7 @@ const TraitsScreen = ({route, navigation}) => {
 
   const onChangeValue = (item, index) => {
     const newData = traitsList.map((newItem) => {
-      if (newItem.id == item.id) {
+      if (newItem.id === item.id) {
         newItem.selected = !newItem.selected;
         return {
           ...newItem,

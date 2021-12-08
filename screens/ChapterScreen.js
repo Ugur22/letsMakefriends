@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useContext, useState, useEffect} from 'react';
 import {View, Text, SafeAreaView, Image, Dimensions} from 'react-native';
-import {Button, Icon} from 'react-native-elements';
+import {Button, Icon, CheckBox} from 'react-native-elements';
 import {ChapterStyle} from '../style/chapterStyle';
 import {styles} from '../style/style';
 import {colors} from '../style/colors';
@@ -10,7 +10,6 @@ import firestore from '@react-native-firebase/firestore';
 import WaveImage from '../assets/images/wave3.svg';
 import CircleImage from '../assets/images/circle.svg';
 import ProgressBar from 'react-native-progress/Bar';
-import CheckBox from '@react-native-community/checkbox';
 
 const ChapterScreen = ({navigation}) => {
   const {user, logout} = useContext(AuthContext);
@@ -61,34 +60,33 @@ const ChapterScreen = ({navigation}) => {
             <View
               style={{
                 position: 'absolute',
-                top: -180,
-                left: -40,
+                top: -160,
+                left: -80,
                 right: 0,
                 bottom: 0,
               }}>
-              <CircleImage height={500} width={500} />
+              <CircleImage height={550} width={600} />
             </View>
             <View
               style={{
-                paddingHorizontal: 40,
+                paddingHorizontal: 25,
               }}>
               {chapterData.tasks.map((task, index) => (
-                <View
-                  style={{flexDirection: 'row', paddingTop: 10}}
-                  key={index}>
+                <View style={{flexDirection: 'row', width: '100%'}} key={index}>
                   <CheckBox
-                    style={{marginTop: -4}}
-                    tintColors={true ? '#000' : '#000'}
-                    value={agree}
-                    onChange={() => setAgree(!agree)}
+                    checkedIcon="dot-circle-o"
+                    textStyle={{color: colors.primary}}
+                    uncheckedIcon="circle-o"
+                    checkedColor={colors.primary}
+                    containerStyle={ChapterStyle.checkbox}
+                    title={task}
+                    checked={agree}
+                    onPress={() => setAgree(!agree)}
                   />
-                  <Text style={{color: colors.secondary, fontSize: 14}}>
-                    {task}
-                  </Text>
                 </View>
               ))}
             </View>
-            <View style={[styles.center, {top: 130, flexDirection: 'row'}]}>
+            <View style={[styles.center, {top: 60, flexDirection: 'row'}]}>
               <Icon
                 raised
                 reverse
