@@ -1,4 +1,4 @@
-# letsbefriends
+# letsMakefriends
 
 | Login             |  Register |
 :-------------------------:|:-------------------------:
